@@ -7,8 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,13 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void updateNotification() {
-        Bitmap androidImage = BitmapFactory
-                .decodeResource(getResources(), R.drawable.mascot_1);
+       // Bitmap androidImage = BitmapFactory
+           //     .decodeResource(getResources(), R.drawable.mascot_1);
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
-        notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
-                .bigPicture(androidImage)
-                .setBigContentTitle("Notification Updated!"))
-                .setSmallIcon(R.drawable.ic_update);
+        notifyBuilder.setStyle(new NotificationCompat.InboxStyle()
+                .setSummaryText("Notification Updated!")
+                .addLine("Whatever")
+                .addLine("Go get a life")
+                .setBigContentTitle("OMG it worked!")
+        );
 
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
         setNotificationButtonState(false, false, true);
