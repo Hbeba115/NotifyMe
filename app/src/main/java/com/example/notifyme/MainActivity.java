@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             "com.example.android.notifyme.ACTION_CANCEL_NOTIFICATION ";
 
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
-    private NotificationManager mNotifyMvcanager;
     private static final int NOTIFICATION_ID = 0;
     private NotificationManager mNotifyManager;
 
@@ -48,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent updatePendingIntent = PendingIntent.getBroadcast
                 (this, NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
-        notifyBuilder.addAction(R.drawable.ic_update, "Update Notification", updatePendingIntent);
+        notifyBuilder.addAction(new NotificationCompat
+                .Action(R.drawable.ic_update, "Update Notification", updatePendingIntent){
+        });
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
         setNotificationButtonState(false, true, true);
     }
@@ -81,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
         notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
                 .bigPicture(androidImage)
-                .setBigContentTitle("Notification Updated!"));
+                .setBigContentTitle("Notification Updated!"))
+                .setSmallIcon(R.drawable.ic_update);
+
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
         setNotificationButtonState(false, false, true);
     }
@@ -100,8 +103,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private PendingIntent createDeleteIntent() {
-        Intent intent = new Intent();
-        intent.setAction(ACTION_CANCEL_NOTIFICATION );
+        Intent intent = new Intent(ACTION_CANCEL_NOTIFICATION);
         return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
     }
 
