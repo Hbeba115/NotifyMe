@@ -81,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
         notifyBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .setSummaryText("Notification Updated!")
                 .addLine("Whatever")
+                .addLine("So ?")
+                .addLine("Maybe another one")
+                .addLine("Ok .. last one")
                 .addLine("Go get a life")
                 .setBigContentTitle("OMG it worked!")
+
         );
 
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
